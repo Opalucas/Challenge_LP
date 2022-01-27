@@ -29,7 +29,7 @@ btnCopiar.addEventListener('click', function(e){
         alert("Copiado!");
         txtMensagem.value = "";
     }else{
-        alert("Nenhuma mensagem encontrada");
+        alert("Antes de copiar deve ser criptografado algo!");
     }
 })
 //#endregion
