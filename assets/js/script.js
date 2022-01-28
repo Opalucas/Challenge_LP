@@ -19,11 +19,32 @@ function validarMensagem(expressao, traducao){
     }
 
     txtMensagem.value = txtEntrada.value.replace(expressao, chave => traducao[chave]);
+    if(txtMensagem.value == txtEntrada.value){
+        alert("A mensagem não pode ser descriptografada, insira outra mensagem!");
+        txtMensagem.value = "";
+    }
     txtEntrada.value = '';
 }
+//Validar input vazio para criptografar
+function validarCriptografia(){
+    if(!txtEntrada.value == ""){
+        validarMensagem(/[aeiou]/g, {'a':'ai','e':'enter','i':'imes','o':'ober','u':'ufat'});
+    }else{
+        alert("Favor, inserir texto no campo abaixo!");
+        txtEntrada.focus();
+    }
+}
+//Validar input vazio para descriptografar
+function validarDescriptografar(){
+    if(!txtEntrada.value == ""){
+        validarMensagem(/ai|enter|imes|ober|ufat/g, {'ai':'a','enter':'e','imes':'i','ober':'o','ufat':'u'});
+    }else{
+        alert("Favor, inserir texto no campo abaixo!");
+        txtEntrada.focus();
+    }
+}
 //Copiar
-btnCopiar.addEventListener('click', function(e){
-    e.preventDefault();
+function copiar(){
     if(!txtMensagem.value == ""){
         navigator.clipboard.writeText(txtMensagem.value);
         alert("Copiado!");
@@ -31,54 +52,24 @@ btnCopiar.addEventListener('click', function(e){
     }else{
         alert("Antes de copiar deve ser criptografado algo!");
     }
-})
+}
+
 //#endregion
 
 //#region Ações
 //Criptografar
 btnCriptografar.addEventListener('click', (e) => {
-    e.preventDefault()
-    validarMensagem(/[aeiou]/g, {'a':'ai','e':'enter','i':'imes','o':'ober','u':'ufat'});
+    e.preventDefault();
+    validarCriptografia();
 })
 //Descriptografar
 btnDescriptografar.addEventListener('click', (e) => {
     e.preventDefault();
-    validarMensagem(/ai|enter|imes|ober|ufat/g, {'ai':'a','enter':'e','imes':'i','ober':'o','ufat':'u'});
+    validarDescriptografar();
+})
+//Copiar
+btnCopiar.addEventListener('click', function(e){
+    e.preventDefault();
+    copiar();
 })
 //#endregion
-
-
-/* Regras Codificador: 
-"e" é convertido para "enter" 
-"i" é convertido para "imes"
-"a" é convertido para "ai"
-"o" é convertido para "ober"
-"u" é convertido para "ufat"
-Apenas letras minúsculas
-Não permite acentuação   
-*/
-
-/* Regras Decodificador: 
-"enter" é convertido para "e" 
-"imes" é convertido para "i"
-"ai" é convertido para "a"
-"ober" é convertido para "o"
-"ufat" é convertido para "u"
-Apenas letras minúsculas
-Não permite acentuação     
-
-
-**Requisitos:**
-- Deve funcionar apenas com letras minúsculas  (OK)
-- Não devem ser utilizados letras com acentos nem caracteres especiais (OK)
-- Deve ser possível converter uma palavra para a versão criptografada e também retornar uma palavra criptografada para a versão original. 
-Por exemplo: (OK)
-`"gato" => "gaitober"`
-`gaitober" => "gato"`
-- A página deve ter campos para inserção do texto a ser criptografado ou descriptografado, e a pessoa usuária deve poder escolher entre as duas opções (OK)
-- O resultado deve ser exibido na tela. (OK)
-**Extras:**
-- Um botão que copie o texto criptografado/descriptografado para a área de transferência - ou seja, que tenha a mesma funcionalidade do `ctrl+C` ou da opção "copiar" do menu dos aplicativos. (OK)
-** Mensagem da Alura**
-"pairaibenterns poberr enterncairair enterssenter dentersaifimesober enter tenterr fimesnailimeszaidober enterlenter coberm sufatcenterssober!"
-*/
