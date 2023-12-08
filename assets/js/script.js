@@ -1,12 +1,13 @@
 //#region obter Inputs e botões do HTML
-var btnCriptografar = document.querySelector("#btn-cripto");
-var btnDescriptografar = document.querySelector("#btn-descripto");
+var btnCriptografar = document.querySelector("#btn-encript");
+var btnDescriptografar = document.querySelector("#btn-decrypt");
 var btnCopiar = document.querySelector("#btn-copy");
 
 var txtMensagem = document.querySelector("#msg");
-var txtEntrada = document.querySelector("#input-texto");
+var txtEntrada = document.querySelector("#input-text");
+
 txtEntrada.focus();
-var errorMessage = document.querySelector("#error-message");
+
 //#endregion
 
 //#region Funções
